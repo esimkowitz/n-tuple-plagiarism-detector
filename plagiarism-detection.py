@@ -25,10 +25,16 @@ def main(synonymsFile, file1, file2, n):
     file1_general_word_list = word_list_generator.generate_word_list(file1_string)
     file2_general_word_list = word_list_generator.generate_word_list(file2_string)
     
+    # Make sure N is less than the number of words in the word lists. If it isn't,
+    # it will return -1.
+    if n > len(file1_general_word_list):
+        return -1
+
     # Initialize our N-tuple comparison algorithm, passing it the size N for the tuples.
     n_tuple_alg = NTupleAlgorithm(n)
     # If the lists of words are the same length, run the N-tuple comparison algorithm and 
-    # return the confidence value
+    # return the confidence value. Assumes the lists are the same length. If they aren't,
+    # it will return -1.
     if len(file1_general_word_list) == len(file2_general_word_list):
         return n_tuple_alg.compare(file1_general_word_list, file2_general_word_list)
     else:
